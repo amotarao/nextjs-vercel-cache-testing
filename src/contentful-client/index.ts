@@ -10,11 +10,11 @@ const testingQuery = gql`
     }
 `;
 
-export async function request(lang: string): Promise<any> {
+export async function request(): Promise<any> {
     const spaceId = process.env.CONTENTFUL_SPACE;
     const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
     const endpoint = `https://graphql.contentful.com/content/v1/spaces/${spaceId}`;
-    const contentfulLocale = lang === 'de' ? 'de' : 'en-US';
+    // const contentfulLocale = lang === 'de' ? 'de' : 'en-US';
 
     const res = await fetch(endpoint, {
         method: 'POST',
@@ -24,7 +24,7 @@ export async function request(lang: string): Promise<any> {
         },
         body: JSON.stringify({
             query: testingQuery,
-            variables: { locale: contentfulLocale },
+            // variables: { locale: contentfulLocale },
         }),
     });
 
