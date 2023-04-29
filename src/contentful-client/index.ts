@@ -1,6 +1,8 @@
-const testingQuery = `
-    query testingData {
-        testingCollection {
+import { gql } from 'graphql-request';
+
+const testingQuery = gql`
+    query testingData($locale: String!) {
+        testingCollection(locale: $locale) {
             items {
                 headline
             }
@@ -8,10 +10,11 @@ const testingQuery = `
     }
 `;
 
-export async function request(): Promise<any> {
+export async function request(lang: string): Promise<any> {
     const spaceId = process.env.CONTENTFUL_SPACE;
     const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
     const endpoint = `https://graphql.contentful.com/content/v1/spaces/${spaceId}`;
+    const contentfulLocale = lang === 'de' ? 'de' : 'en-US';
 
     const res = await fetch(endpoint, {
         method: 'POST',
@@ -20,7 +23,8 @@ export async function request(): Promise<any> {
             Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
-            testingQuery,
+            query: testingQuery,
+            variables: { locale: contentfulLocale },
         }),
     });
 
