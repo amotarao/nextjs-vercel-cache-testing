@@ -20,7 +20,7 @@ const testingQuery = gql`
     }
 `;
 
-export async function request(): Promise<any> {
+export async function graphqlRequest(): Promise<any> {
     const spaceId = process.env.CONTENTFUL_SPACE;
     const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
     const endpoint = `https://graphql.contentful.com/content/v1/spaces/${spaceId}`;
@@ -39,5 +39,15 @@ export async function request(): Promise<any> {
     });
 
     const json = await res.json();
-    return json.data;
+    return json.data.testingCollection.items[0].headline;
+}
+
+export async function apiRequest(): Promise<any> {
+    const spaceId = process.env.CONTENTFUL_SPACE;
+    const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
+    const endpoint = `https://cdn.contentful.com/spaces/${spaceId}/entries`;
+
+    const res = await fetch(`${endpoint}?access_token=${accessToken}`);
+    const json = await res.json();
+    return json.items[0].fields.headline;
 }
