@@ -1,8 +1,18 @@
 import { gql } from 'graphql-request';
 
-const testingQuery = gql`
+const testingQueryWithLang = gql`
     query testingData($locale: String!) {
         testingCollection(locale: $locale) {
+            items {
+                headline
+            }
+        }
+    }
+`;
+
+const testingQuery = gql`
+    query testingData {
+        testingCollection {
             items {
                 headline
             }
