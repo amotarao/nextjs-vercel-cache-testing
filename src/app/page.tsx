@@ -7,10 +7,6 @@ export default async function Home() {
   return (
     <main>
       <h1>{data}</h1>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <a href={`/`}>Full reload of page</a>
-        <Link href={`/`}>NextJS link to /</Link>
-      </div>
     </main>
   )
 }
