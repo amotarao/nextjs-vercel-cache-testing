@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default async function Home() {
   const data = await randomRequest();
-  console.log(`Data generated on build for languag: `, data);
+  console.log(`Data generated on build: `, data);
   return (
     <main>
       <h1>{data}</h1>
