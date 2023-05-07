@@ -7,3 +7,9 @@ export async function apiRequest(): Promise<any> {
     const json = await res.json();
     return json.items[0].fields.headline;
 }
+
+export async function pokemonRequest(): Promise<any> {
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/pikachu`);
+    const json = await res.json();
+    return json.name;
+}
