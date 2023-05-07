@@ -13,3 +13,9 @@ export async function pokemonRequest(): Promise<any> {
     const json = await res.json();
     return json.name;
 }
+
+export async function randomRequest(): Promise<any> {
+    const res = await fetch(`https://randomuser.me/api/`);
+    const json = await res.json();
+    return json.results[0].name.first;
+}
